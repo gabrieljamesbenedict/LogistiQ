@@ -3,6 +3,7 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: #F3F7FF;
 }
 
 * {
@@ -14,6 +15,8 @@ body {
   --color-background: #F3F7FF;
   --color-foreground: #17304F;
   --color-card: #FBFCFF;
+
+  --color-card-border: rgba(35, 72, 117, 0.6); /* #234875 0.60 */
 
   --color-primary: #7DB6FB;
   --color-primary-hover: #9CC7FC;
