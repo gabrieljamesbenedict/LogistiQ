@@ -1,8 +1,10 @@
 import React from 'react'
 
-const ListItem = () => {
+const ListItem = ({children}: any) => {
   return (
-    <li></li>
+    <li className="py-4 cursor-pointer inline-block transition-all hover:scale-110 hover:text-accent">
+      {children}
+    </li>
   )
 }
 
