@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const Header = () => {
   return (
-    <div className="flex justify-between bg-card border-b-2 border-card-border px-8 py-6 sticky top-0 z-10">
+    <div className="flex justify-between bg-card border-b-2 border-card-border px-8 py-6 fixed top-0 z-10 w-full">
         <Image
             className="h-10 w-auto translate-y-1"
             src={LogistiQ}
