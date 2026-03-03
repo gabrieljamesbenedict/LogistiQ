@@ -5,7 +5,7 @@ import ListItem from './ListItem'
 const NavigationBar = () => {
   return (
     <div
-        className="min-w-[12vw] bg-card border-r-2 border-card-border flex flex-col justify-between items-center pt-36 pb-12 h-full fixed top-0 left-0"
+        className="min-w-[12vw] bg-card border-r-2 border-card-border flex flex-col justify-between items-center pt-26 pb-8 h-full fixed top-0 left-0"
     >
         <div>
             <List>
