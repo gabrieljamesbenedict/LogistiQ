@@ -3,6 +3,7 @@ import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
+import NavigationBar from './components/NavigationBar'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.variable} antialiased`}>
         <Header />
+        <NavigationBar/>
         <MainContent>
           {children}
         </MainContent>
