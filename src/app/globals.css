@@ -3,7 +3,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #F3F7FF;
+  color: #234875;
 }
 
 * {
@@ -12,13 +12,15 @@ body {
 
 @theme {
 
-  --color-background: #F3F7FF;
+  --color-background: #E6EEFF;
   --color-foreground: #17304F;
   --color-card: #FBFCFF;
 
   --color-card-border: rgba(35, 72, 117, 0.6); /* #234875 0.60 */
 
-  --color-primary: #7DB6FB;
-  --color-primary-hover: #9CC7FC;
+  --color-primary: #234875;
+  --color-primary-hover: #356DB1;
+
+  --color-accent: #7DB6FB;
 
 }
