@@ -7,7 +7,6 @@ export interface DataPoint{
   value: number;
 }
 
-//misc, maintenance, fuel, tolls, salary
 export enum ExpenseType {
   MISC = 'Misc',
   MAINTENANCE = 'Maintenance',
@@ -28,17 +27,17 @@ export default function ChartCard({ data }: ChartCardProps) {
   }));
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-      <PieChart margin={{top:30,right:30,bottom:30,left:30}}>
+      <PieChart margin={{top:30,bottom:30}}>
         <Pie
           data={dataFormatted}
           cx = "50%"
-          cy = "50%"
+          cy = "45%"
           outerRadius={100}
           dataKey="value"
           label>
         </Pie>
         <Tooltip/>
-        <Legend />
+        <Legend verticalAlign='bottom'/>
       </PieChart>
     </ResponsiveContainer>
   )
