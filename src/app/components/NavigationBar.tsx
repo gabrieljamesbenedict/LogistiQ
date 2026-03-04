@@ -22,7 +22,7 @@ const NavigationBar = () => {
 		</div>
 		<div>
 			<List>
-				<List><Link href="/login">Logout</Link></List>
+				<ListItem><Link href="/login">Logout</Link></ListItem>
 			</List>
 		</div>
 	</div>
