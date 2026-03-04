@@ -54,29 +54,34 @@ export const CurrentList = ({trips}: { trips: Trip[] }) => {
   )
 }
 
-export const HistoryList = ({trips}: { trips: Trip[] }) => {
+export const HistoryList = ({ trips }: { trips: Trip[] }) => {
   return (
-    <ul className="flex flex-col text-xl divide-y divide-card-border">
-      {trips.slice(-4).map((trip) => (
-        <li key={trip.id} className="p-4 flex gap-4 items-center">
-          <div className="whitespace-nowrap pr-2">
-              <h2>Trip #{trip.id}</h2>
-          </div>
-          <div className="w-full">
-            <div className='flex justify-between'>
-              <h2>{trip.destination}</h2>
-              <h2>{trip.status}</h2>
-            </div>
-            <div className='flex justify-between'>
-              <h2>{trip.driver}</h2>
-              <h2>{formatDate(trip.date)}</h2>
-            </div>
-          </div>
+    <div className="text-xl">
+      <ul className="flex flex-col divide-y divide-card-border">
+        <li className="grid grid-cols-[0.2fr_1fr_1fr_1fr_1fr_1fr_1fr] font-semibold gap-4 p-4 items-center text-center text-expand">
+          <span>ID</span>
+          <span>Driver</span>
+          <span>Date</span>
+          <span>Status</span>
+          <span>Expenses</span>
+          <span>Profit</span>
+          <span>Customer</span>
         </li>
-      ))}
-    </ul>
-  )
-}
+        {trips.map((trip) => (
+          <li key={trip.id} className="grid grid-cols-[0.2fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4 p-4 items-center text-center text-primary">
+            <span>{trip.id}</span>
+            <span>{trip.driver}</span>
+            <span>{formatDate(trip.date)}</span>
+            <span>{trip.status}</span>
+            <span>{trip.totalExpenses}</span>
+            <span>{trip.totalProfit}</span>
+            <span>{trip.customerName}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const formatDate = (date: Date) =>
   date.toLocaleString('en-US', {
