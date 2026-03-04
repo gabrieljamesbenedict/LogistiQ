@@ -58,7 +58,7 @@ export const HistoryList = ({ trips }: { trips: Trip[] }) => {
   return (
     <div className="text-xl">
       <ul className="flex flex-col divide-y divide-card-border">
-        <li className="grid grid-cols-[0.2fr_1fr_1fr_1fr_1fr_1fr_1fr] font-semibold gap-4 p-4 items-center text-center text-expand">
+        <li className="grid grid-cols-[0.3fr_1fr_1fr_1fr_1fr_1fr_1fr] font-semibold p-4 items-center text-center text-expand">
           <span>ID</span>
           <span>Driver</span>
           <span>Date</span>
@@ -68,7 +68,7 @@ export const HistoryList = ({ trips }: { trips: Trip[] }) => {
           <span>Customer</span>
         </li>
         {trips.map((trip) => (
-          <li key={trip.id} className="grid grid-cols-[0.2fr_1fr_1fr_1fr_1fr_1fr_1fr] gap-4 p-4 items-center text-center text-primary">
+          <li key={trip.id} className="grid grid-cols-[0.3fr_1fr_1fr_1fr_1fr_1fr_1fr] p-4 items-center text-center text-primary">
             <span>{trip.id}</span>
             <span>{trip.driver}</span>
             <span>{formatDate(trip.date)}</span>
