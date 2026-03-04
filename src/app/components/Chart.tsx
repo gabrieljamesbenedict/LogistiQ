@@ -17,11 +17,7 @@ export enum ExpenseType {
 
 const COLORS = ['#4f46e5', '#10b981', '#f59e0b', '#ef4444', '#3b82f6'];
 
-interface ChartCardProps {
-  data: DataPoint[];
-}
-
-export default function ChartCard({ data }: ChartCardProps) {
+export default function ChartCard({ data }: {data : DataPoint[]}) {
   const dataFormatted = data.map((item, index) => ({
     ...item, fill: COLORS[index]
   }));
