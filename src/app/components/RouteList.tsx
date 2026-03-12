@@ -1,49 +1,67 @@
 import React from 'react'
 import Card from './Card';
 import Image from 'next/image'
+import { Trip } from './TripList';
 
 export interface Route {
-  id: number
+  id: number;
   stops: Stops[];
-  driver: string;
 }
 
 interface Stops{
+  id: number;
   place: string;
   placeDesc: string;
   time: Date;
   price: number;
 }
 
+type RouteListProps = {
+  trip?: Trip;
+}
 
-export const RouteShow= ({ trips }: { trips: Trip[] }) => {
+export const RouteList= (props: RouteListProps) => {
   return (
-    <div className="text-xl">
-      <ul className="flex flex-col">
-        {trips.map((trip) => (
-          <li key={trip.id} className="p-4 items-center text-primary">
-            <Card>
-              <div className="p-4 flex justify-between">
-                <div className="flex flex-col flex-1 justify-between">
-                  <h1 className="text-3xl font-bold">#{trip.id}</h1>
-                  <h2>{trip.status}</h2>
-                  <h2>{trip.driver}</h2>
-                </div>
-                <div className='flex flex-row'>
-                  <Image src="/tripDesign.svg" alt="tripDesign" width={40} height={40} />
-                    <div className="flex flex-col">
-                        <h2 className='text-base'>Pickup</h2>
-                      <h2>{trip.origin}</h2>
-                    <div className="flex-1" />
-                        <h2 className='text-base'>Dropoff</h2>
-                      <h2>{trip.destination}</h2>
-                    </div>
-                </div>
+    <ul className="text-xl flex flex-col p-4">
+      <Card>
+        <h2>{props.trip?.driver}</h2>
+        {props?.trip?.route?.stops.map((stop) => (
+          <li key={stop.id} className="items-center text-primary">
+            <div className="p-4 flex justify-between">
+              <div className="flex flex-col flex-1 justify-between">
+                <h1 className="text-2xl font-bold">{stop.place}</h1>
+                <h1 className="text-xl text-accent">{stop.placeDesc}</h1>
+                <h2>₱{stop.price}</h2>
               </div>
-            </Card>
+              <h2>{new Date(stop.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</h2>
+            </div>
           </li>
         ))}
-      </ul>
-    </div>
+
+        <div className="text-xl flex justify-between flex-row bg-gray-200 rounded-[20px]">
+          <div className='flex flex-col p-5'>
+            <div className="flex flex-col p-3">
+              <h1 className='text-expand'>Driver Name</h1>
+              <h1>{props.trip?.driver}</h1>
+            </div>
+            <div className="flex flex-col p-3">
+              <h1 className='text-expand'>Status</h1>
+              <h1>{props.trip?.status}</h1>
+            </div>
+          </div>
+          <div className='flex flex-col p-5'>
+            <div className="flex flex-col p-3">
+              <h1 className='text-expand'>Total Expenses</h1>
+              <h1>{props.trip?.totalExpenses}</h1>
+            </div>
+            <div className="flex flex-col p-3">
+              <h1 className='text-expand'>Customer Name</h1>
+              <h1>{props.trip?.customerName}</h1>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </ul>
+      
   );
 };
