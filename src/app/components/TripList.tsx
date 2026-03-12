@@ -1,12 +1,14 @@
 import React from 'react'
 import Card from './Card';
 import Image from 'next/image'
+import { Route } from './RouteList';
 
 export interface Trip {
   id: number;
   driver: string;
   origin: string;
   destination: string;
+  route?: Route;
   date: Date;
   status: TripStatus;
   customerName?: string;
