@@ -2,31 +2,23 @@
 
 import CardRowContainer from '../components/CardRowContainer'
 import { Trip, TripList } from '../components/TripList'
-import { useState, useEffect } from 'react';
-import { apiFetch } from '../lib/api'; 
+import { useLiveApi } from '../lib/api';
 
 const TripsPage = () => {
+  const { data, loading } = useLiveApi<Trip[]>("/trips");
 
-  const [tripsData, setTripsData] = useState<Trip[]>([]);
+  const tripsData = data || [];
 
-  useEffect(() => {
-    const loadTrips = async () => {
-      try {
-        const data = await apiFetch("/trips");
-        setTripsData(data);
-      } catch (error) {
-        console.error("Error loading trips:", error);
-      }
-    };
-
-    loadTrips();
-  }, []);
-  
   return (
     <div className="flex flex-col gap-6 justify-between">
       <CardRowContainer>
-        <TripList trips={tripsData} />
-        <TripList trips={tripsData} />
+        <TripList 
+          trips={tripsData.filter(t => (t.status as any) === "IN_TRANSIT")} 
+        />
+        
+        <TripList 
+          trips={tripsData.filter(t => (t.status as any) === "COMPLETED")} 
+        />
       </CardRowContainer>
     </div>
   )

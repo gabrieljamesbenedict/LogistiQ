@@ -26,7 +26,7 @@ const DashboardPage = () => {
         const tripsResponse = await fetch("http://localhost:8080/api/trips", { headers });
         if (tripsResponse.ok) {
           const trips = await tripsResponse.json();
-          setTripsData(trips);
+          setTripsData(Array.isArray(trips) ? trips : []);
           setTotalTrips(trips.length);
         } else {
           console.error("Failed to fetch trips:", tripsResponse.status);
