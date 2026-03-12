@@ -9,14 +9,28 @@ import { useState, useEffect } from 'react';
 
 const DashboardPage = () => {
 
-  const [totalTrips, setTotalTrips] = useState(0);
-  const [totalExpenses, setTotalExpenses] = useState(0);
-  const [expensesData, setExpensesData] = useState<DataPoint[]>([]); 
-  const [tripsData, setTripsData] = useState<Trip[]>([]); 
+  const dummyExpensesData: DataPoint[] = [ // dummy data
+    { name: 'Fuel',          value: 8200,  type: ExpenseType.FUEL },
+    { name: 'Maintenance',   value: 3400,  type: ExpenseType.MAINTENANCE },
+    { name: 'Miscellaneous', value: 1800,  type: ExpenseType.MISCELLANEOUS },
+  ]
+
+  const dummyTripsData: Trip[] = [ // dummy data remove later
+    { id: 108284, driver: 'Juan Dela Cruz',  origin: 'Mapua Makati, Pablo Ocampo Sr.', destination: '#148 Rizal Ave., Caloocan', date: '2026-03-10', status: TripStatus.COMPLETED },
+    { id: 108291, driver: 'Maria Santos',    origin: 'Taguig, BGC, 9th Ave.',          destination: '#22 Mabini St., Pasay',    date: '2026-03-10', status: TripStatus.IN_TRANSIT },
+    { id: 108305, driver: 'Ramon Reyes',     origin: 'QC, Commonwealth Ave.',           destination: '#5 Gen. Luna St., Marikina', date: '2026-03-11', status: TripStatus.PENDING },
+    { id: 108312, driver: 'Ana Villanueva',  origin: 'Makati, Ayala Ave.',              destination: '#90 Shaw Blvd., Mandaluyong', date: '2026-03-11', status: TripStatus.ARRIVED },
+    { id: 108320, driver: 'Jose Mendoza',    origin: 'Pasig, Ortigas Center',           destination: '#3 Espana Blvd., Sampaloc', date: '2026-03-12', status: TripStatus.COMPLETED },
+  ]
+
+  const [totalTrips, setTotalTrips] = useState(dummyTripsData.length);
+  const [totalExpenses, setTotalExpenses] = useState(dummyExpensesData.reduce((s, e) => s + e.value, 0));
+  const [expensesData, setExpensesData] = useState<DataPoint[]>(dummyExpensesData);
+  const [tripsData, setTripsData] = useState<Trip[]>(dummyTripsData);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      const credentials = btoa("admin:secret"); 
+      const credentials = btoa("admin:secret");
       const headers = {
         "Authorization": `Basic ${credentials}`,
         "Content-Type": "application/json"
@@ -26,25 +40,26 @@ const DashboardPage = () => {
         const tripsResponse = await fetch("http://localhost:8080/api/trips", { headers });
         if (tripsResponse.ok) {
           const trips = await tripsResponse.json();
-          setTripsData(trips);
-          setTotalTrips(trips.length);
-        } else {
-          console.error("Failed to fetch trips:", tripsResponse.status);
+          if (trips && trips.length > 0) {
+            setTripsData(trips);
+            setTotalTrips(trips.length);
+          }
         }
+      } catch {
+        // if backend not running, dummy data show
+      }
 
+      try {
         const expensesResponse = await fetch("http://localhost:8080/api/expenses", { headers });
         if (expensesResponse.ok) {
           const expenses = await expensesResponse.json();
-          setExpensesData(expenses);
-          
-          const total = expenses.reduce((sum: number, item: DataPoint) => sum + item.value, 0);
-          setTotalExpenses(total);
-        } else {
-          console.error("Failed to fetch expenses:", expensesResponse.status);
+          if (expenses && expenses.length > 0) {
+            setExpensesData(expenses);
+            setTotalExpenses(expenses.reduce((sum: number, item: DataPoint) => sum + item.value, 0));
+          }
         }
-
-      } catch (error) {
-        console.error("Error connecting to backend:", error);
+      } catch {
+        // if backend not running, dummy data show
       }
     };
 
