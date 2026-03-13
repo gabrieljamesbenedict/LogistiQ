@@ -2,7 +2,7 @@ import React from 'react'
 
 const CardRowContainer = ({children}: any) => {
   return (
-    <div className="flex justify-between gap-4 *:flex-auto">
+    <div className="flex justify-between gap-4 *:flex-1">
         {children}
     </div>
   )
