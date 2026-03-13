@@ -9,6 +9,7 @@ export interface Trip {
   endedAt?: string;
   employeeID: number[];
   cargoDescription: string;
+  revenue?: number;
 }
 
 
