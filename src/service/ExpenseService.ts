@@ -10,7 +10,8 @@ export interface Expense {
 
 export enum ExpenseCategory {
     FUEL,
-    TOLL
+    TOLL,
+    OTHERS
 }
 
 
