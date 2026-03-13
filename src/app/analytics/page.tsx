@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import CardRowContainer from '../components/CardRowContainer'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend,
 } from 'recharts'
+import { HistoryList, Trip } from '../components/TripList'
 
 const tabs = ['Trip Reports', 'Expense Report', 'Vehicle Stats', 'Driver Performance', 'Financial Summary']
 
@@ -28,20 +29,38 @@ const statusData = [ // dummy data remove later
 
 const STATUS_COLORS = ['#1E3A5F', '#4A90D9', '#A8C8F0']
 
-const historyData = [ // dummy data
-  { tripNumber: '1038', driver: 'John Doe', date: '09/12/26', status: 'Pending', route: 'Manila → Makati', distance: '13KM' },
-  { tripNumber: '1038', driver: 'John Doe', date: '09/12/26', status: 'Approved', route: 'Manila → Makati', distance: '13KM' },
-  { tripNumber: '1038', driver: 'John Doe', date: '09/12/26', status: 'Approved', route: 'Manila → Makati', distance: '13KM' },
-  { tripNumber: '1038', driver: 'John Doe', date: '09/12/26', status: 'Approved', route: 'Manila → Makati', distance: '13KM' },
-]
 
 const AnalyticsPage = () => {
+  const [tripsData, setTripsData] = useState<Trip[]>([]); 
   const [activeTab, setActiveTab] = useState('Trip Reports')
   const [fromDate, setFromDate] = useState('2025-10-10')
   const [toDate, setToDate] = useState('2026-02-22')
   const [driver, setDriver] = useState('All Drivers')
   const [vehicle, setVehicle] = useState('All Vehicles')
 
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      const credentials = btoa("admin:secret"); 
+      const headers = {
+        "Authorization": `Basic ${credentials}`,
+        "Content-Type": "application/json"
+      };
+
+      try {
+        const tripsResponse = await fetch("http://localhost:8080/api/trips", { headers });
+        if (tripsResponse.ok) {
+          const trips = await tripsResponse.json();
+          setTripsData(Array.isArray(trips) ? trips : []);
+        } else {
+          console.error("Failed to fetch trips:", tripsResponse.status);
+        }
+      } catch (error) {
+        console.error("Error connecting to backend:", error);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
   return (
     <div className="flex flex-col gap-6">
 
@@ -195,29 +214,10 @@ const AnalyticsPage = () => {
           </div>
 
           {/* Trip History */}
-          <Card>
-            <h2 className="font-semibold text-xl mb-2">Trip History</h2>
-            <ul className="flex flex-col divide-y divide-card-border">
-              <li className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] font-semibold p-4 text-center text-expand">
-                <span>Trip Number</span>
-                <span>Driver</span>
-                <span>Date</span>
-                <span>Status</span>
-                <span>Route</span>
-                <span>Distance</span>
-              </li>
-              {historyData.map((row, i) => (
-                <li key={i} className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] p-4 items-center text-center text-primary">
-                  <span>#{row.tripNumber}</span>
-                  <span>{row.driver}</span>
-                  <span>{row.date}</span>
-                  <span>{row.status}</span>
-                  <span>{row.route}</span>
-                  <span>{row.distance}</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
+        <Card>
+          <h2>Trip History</h2>
+          <HistoryList trips={tripsData}/>
+        </Card>
         </>
       )}
 

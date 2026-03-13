@@ -11,7 +11,13 @@ const DashboardPage = () => {
 
   const [totalTrips, setTotalTrips] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
-  const [expensesData, setExpensesData] = useState<DataPoint[]>([]); 
+  const [expensesData, setExpensesData] = useState<DataPoint[]>([ //dummy data, replace with api call
+    { name: ExpenseType.MISC, value: 30 },
+    { name: ExpenseType.MAINTENANCE, value: 45 },
+    { name: ExpenseType.TOLLS, value: 45 },
+    { name: ExpenseType.SALARY, value: 28 },
+    { name: ExpenseType.FUEL, value: 28 },
+  ]);
   const [tripsData, setTripsData] = useState<Trip[]>([]); 
 
   useEffect(() => {
@@ -74,6 +80,8 @@ const DashboardPage = () => {
         <Card>
           <h2>Expenses Chart</h2>
           <Chart data={expensesData} />
+
+
         </Card>
         <Card>
           <div className="flex justify-between">
