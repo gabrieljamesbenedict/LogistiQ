@@ -119,11 +119,7 @@ export const TripList = ({ trips }: { trips: Trip[] }) => {
   );
 };
 
-const formatDate = (date: Date) =>
-  date.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-});
+const formatDate = (date: Date | string) => {
+  const d = new Date(date);
+  return d.toISOString().slice(0, 10);
+};
