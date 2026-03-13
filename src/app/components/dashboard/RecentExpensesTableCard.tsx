@@ -12,7 +12,7 @@ const RecentExpensesTableCard = ({title}: any) => {
 
   useEffect(() => {
 
-    getAllExpenses().then(result => setRecentExpenseList(result.slice(0, 10)));
+    getAllExpenses().then(result => {setRecentExpenseList(result.slice(0, 5))});
     
   },[]);
   
@@ -23,7 +23,7 @@ const RecentExpensesTableCard = ({title}: any) => {
       <ul className="flex flex-col divide-y divide-card-border min-h-75">
 
         {/* Header */}
-        <li className="grid grid-cols-[1fr_2fr_1fr_1fr] font-semibold p-4 text-center text-expand">
+        <li className="grid grid-cols-[1fr_2fr_1fr_2fr] font-semibold p-4 text-center text-expand">
           <span>Expense ID</span>
           <span>Amount</span>
           <span>Description</span>
@@ -34,7 +34,7 @@ const RecentExpensesTableCard = ({title}: any) => {
         {recentExpenseList.map((expense) => (
           <li
             key={expense.expenseId}
-            className="grid grid-cols-[1fr_2fr_1fr_1fr] p-4 items-center text-center text-primary hover:bg-card-hover transition"
+            className="grid grid-cols-[1fr_2fr_1fr_2fr] p-4 items-center text-center text-primary hover:bg-card-hover transition"
           >
             <span>{expense.expenseId}</span>
             <span>PHP {expense.amount}</span>

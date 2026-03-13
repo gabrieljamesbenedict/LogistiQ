@@ -11,7 +11,7 @@ const RecentTripsTableCard = ({title}: any) => {
 
   useEffect(() => {
 
-    getAllTrips().then(result => setRecentTripList(result.slice(0, 10)));
+    getAllTrips().then(result => setRecentTripList(result.slice(0, 5)));
     
   },[]);
   
