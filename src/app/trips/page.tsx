@@ -12,13 +12,15 @@ const TripsPage = () => {
   const tripsData = data || [];
   const trip = tripsData.at(0);
 
+  const baseDate = new Date();
+
   // Drivers in current DB dont have route,
 const tripPlaceholder: Trip = {
   id: 1,
   driver: "Juan Dela Cruz",
   origin: "Manila",
   destination: "Quezon City",
-  date: new Date(),
+  date: baseDate,
   status: TripStatus.IN_TRANSIT,
   customerName: "Maria Santos",
   totalExpenses: 500,
@@ -30,21 +32,21 @@ const tripPlaceholder: Trip = {
         id: 1,
         place: "Manila",
         placeDesc: "Pickup at Manila",
-        time: new Date(),
+        time: new Date(baseDate),
         price: 0,
       },
       {
         id: 2,
         place: "Makati",
         placeDesc: "Stopover at Makati",
-        time: new Date(),
+        time: new Date(baseDate.getTime() + 1 * 60 * 60 * 1000), // +1 hour
         price: 50,
       },
       {
         id: 3,
-        place: "Quezon City",
-        placeDesc: "Dropoff at Quezon City",
-        time: new Date(),
+        place: "Cebu City",
+        placeDesc: "Dropoff at Cebu City",
+        time: new Date(baseDate.getTime() + 2 * 60 * 60 * 1000), // +2 hours
         price: 100,
       },
     ],
