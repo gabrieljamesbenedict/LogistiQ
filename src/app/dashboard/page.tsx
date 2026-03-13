@@ -1,10 +1,13 @@
 "use client"
 
-import Chart, { DataPoint, ExpenseType } from '../components/Chart'
+import Chart, { DataPoint } from '../components/PieChartCard'
 import CardRowContainer from '../components/CardRowContainer'
 import {CurrentList, HistoryList, Trip, TripStatus } from '../components/TripList'
 import { useState, useEffect } from 'react';
 import SingleNumberStatisticCard from '../components/dashboard/SingleNumberStatisticCard'
+import TableStatisticCard from '../components/dashboard/RecentTripsTableCard';
+import RecentTripsTableCard from '../components/dashboard/RecentTripsTableCard';
+import RecentExpensesTableCard from '../components/dashboard/RecentExpensesTableCard';
 
 const DashboardPage = () => {
 
@@ -57,6 +60,14 @@ const DashboardPage = () => {
         <SingleNumberStatisticCard title={"Recent Completed Trips"} data={0} iconSrc={"/package_car.svg"}/>
         <SingleNumberStatisticCard title={"Recent Expenses Total"} data={0} iconSrc={"/money.svg"}/>
         <SingleNumberStatisticCard title={"Recent Revenue Total"} data={0} iconSrc={"/money.svg"}/>
+      </CardRowContainer>
+      <CardRowContainer>
+        <RecentTripsTableCard title={"Recent Trips"} />
+        <RecentExpensesTableCard title={"Recent Expenses"} />
+      </CardRowContainer>
+      <CardRowContainer>
+        <RecentTripsTableCard title={"Recent Trips"} />
+        <RecentExpensesTableCard title={"Recent Expenses"} />
       </CardRowContainer>
     </div>
   )
