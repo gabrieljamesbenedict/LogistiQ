@@ -1,3 +1,5 @@
+import { Trip } from "./TripService";
+
 const BASE_URL = 'http://localhost:8080/api/expenses';
 
 export interface Expense {
@@ -59,3 +61,10 @@ export const deleteExpense = (expense: Expense): Promise<void> => {
     if (!res.ok) throw new Error('Failed to delete expense');
   });
 };
+
+
+export const getAllExpenseByTrip = (trip: Trip): Promise<Expense[]> => {
+  return fetch(`${BASE_URL}?tripId=${trip.tripId}`, {
+    credentials: 'include'
+  }).then(res => res.json());
+}
