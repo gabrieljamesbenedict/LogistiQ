@@ -28,11 +28,12 @@ const statusColors: Record<ExpenseStatus, string> = {
 };
 
 const ExpensesPage = () => {
-  const dummyExpenses: Expense[] = [ // delete dummy data
-    { id: 1, tripNumber: '1038', driver: 'John Doe', date: '2026-09-12', status: ExpenseStatus.PENDING, totalExpense: 1230, type: 'Miscellaneous' },
-    { id: 2, tripNumber: '1038', driver: 'John Doe', date: '2026-09-12', status: ExpenseStatus.APPROVED, totalExpense: 1230, type: 'Fuel' },
-    { id: 3, tripNumber: '1038', driver: 'John Doe', date: '2026-09-12', status: ExpenseStatus.APPROVED, totalExpense: 1230, type: 'Fuel' },
-    { id: 4, tripNumber: '1038', driver: 'John Doe', date: '2026-09-12', status: ExpenseStatus.APPROVED, totalExpense: 1230, type: 'Air Pump' },
+  const dummyExpenses: Expense[] = [
+    { id: 1, tripNumber: '1001', driver: 'Juan Dela Cruz', date: '2026-03-01', status: ExpenseStatus.PENDING, totalExpense: 350, type: 'Toll' },
+    { id: 2, tripNumber: '1002', driver: 'Maria Santos', date: '2026-03-02', status: ExpenseStatus.APPROVED, totalExpense: 1200, type: 'Fuel' },
+    { id: 3, tripNumber: '1003', driver: 'Pedro Reyes', date: '2026-03-03', status: ExpenseStatus.REJECTED, totalExpense: 150, type: 'Parking' },
+    { id: 4, tripNumber: '1004', driver: 'Ana Cruz', date: '2026-03-04', status: ExpenseStatus.APPROVED, totalExpense: 800, type: 'Maintenance' },
+    { id: 5, tripNumber: '1005', driver: 'Juan Dela Cruz', date: '2026-03-05', status: ExpenseStatus.PENDING, totalExpense: 500, type: 'Miscellaneous' },
   ];
 
   const [expenses, setExpenses] = useState<Expense[]>(dummyExpenses);
