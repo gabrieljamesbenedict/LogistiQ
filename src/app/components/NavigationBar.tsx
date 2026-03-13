@@ -17,7 +17,7 @@ const NavigationBar = () => {
 				<ListItem isActive={pathname === '/trips'}><Link href="/trips" className="block">Trips</Link></ListItem>
 				<ListItem isActive={pathname === '/expenses'}><Link href="/expenses" className="block">Expenses</Link></ListItem>
 				<ListItem isActive={pathname === '/analytics'}><Link href="/analytics" className="block">Analytics</Link></ListItem>
-				<ListItem isActive={pathname === '/drivers'}><Link href="/drivers" className="block">Drivers</Link></ListItem>
+				{/* <ListItem isActive={pathname === '/drivers'}><Link href="/drivers" className="block">Drivers</Link></ListItem> */}
 			</List>
 		</div>
 		<div>
